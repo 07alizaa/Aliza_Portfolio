@@ -57,82 +57,69 @@ const skillGroups = [
 const SkillIconCard = ({ skill }) => {
   const [hovered, setHovered] = useState(false);
   const Icon = skill.icon;
-
   return (
     <motion.div
-      className="relative p-6 rounded-[2rem] glass flex flex-col items-center justify-center gap-4 group hover:shadow-2xl transition-all duration-500 border border-white/5"
+      className="relative p-2 md:p-3 lg:p-4 rounded-xl glass flex flex-col items-center justify-center gap-2 group hover:shadow-xl transition-all duration-400 border border-white/10 min-h-[70px] md:min-h-[90px]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      whileHover={{ y: -10, scale: 1.05 }}
+      whileHover={{ y: -6, scale: 1.07 }}
     >
-      <div className="relative z-10 p-5 rounded-2xl bg-white/5 border border-white/10 group-hover:border-accent transition-colors">
+      <div className="relative z-10 p-2 md:p-3 rounded-lg bg-white/5 border border-white/10 group-hover:border-accent transition-colors flex items-center justify-center">
         <Icon
-          size={32}
+          size={22}
           style={{ color: hovered ? skill.color : 'var(--theme-text)' }}
-          className="transition-all duration-500"
+          className="transition-all duration-400"
         />
       </div>
-
-      <h4 className="font-bold text-xs tracking-tight relative z-10 group-hover:text-accent transition-colors text-center uppercase">
+      <h4 className="font-semibold text-[10px] md:text-xs tracking-tight relative z-10 group-hover:text-accent transition-colors text-center uppercase">
         {skill.name}
       </h4>
-
     </motion.div>
   );
 };
 
 export const Skills = () => {
+  // Flatten all skills for a single grid
+  const allSkills = skillGroups.flatMap(g => g.items.map(skill => ({ ...skill, group: g.title })));
   return (
-    <section id="skills" className="py-32 px-6 relative overflow-hidden">
-      <div className="container mx-auto">
-        <div className="text-center mb-24">
-          <h2 className="text-5xl lg:text-7xl font-black mb-6 tracking-tighter uppercase leading-none">
-            The <span className="text-accent italic">Engine</span> Room
-          </h2>
-          <p className="max-w-2xl mx-auto opacity-60 text-lg font-medium italic">
-            Certified expertise in backend architecture, database optimization, and cloud solutions.
-          </p>
+    <section id="skills" className="py-20 px-2 md:px-8 relative overflow-hidden flex items-center justify-center min-h-[70vh]">
+      <div className="container mx-auto flex flex-col items-center">
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-center uppercase">
+          Technical Skillset & Certifications
+        </h2>
+        <p className="max-w-2xl mx-auto opacity-70 text-base md:text-lg font-medium text-center mb-10">
+          Demonstrated expertise in modern web development, cloud, and professional tooling.
+        </p>
+        <div className="w-full max-w-6xl">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 md:gap-5 lg:gap-6">
+            {allSkills.map(skill => (
+              <SkillIconCard key={skill.name + skill.group} skill={skill} />
+            ))}
+          </div>
         </div>
-
-        <div className="space-y-20">
-          {skillGroups.map((group, groupIndex) => (
-            <div key={groupIndex}>
-              <div className="flex items-center gap-4 mb-10 opacity-40">
-                <span className="text-xs font-black uppercase tracking-[0.5em]">{group.title}</span>
-                <div className="h-[1px] flex-1 bg-current" />
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                {group.items.map(skill => (
-                  <SkillIconCard key={skill.name} skill={skill} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Certifications Highlight */}
-        <div className="mt-32 p-10 glass rounded-[3rem] border border-accent/20 relative overflow-hidden group">
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="mt-16 md:mt-24 p-6 md:p-10 glass rounded-2xl md:rounded-[2.5rem] border border-accent/20 w-full max-w-3xl relative overflow-hidden group">
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-10">
             <div className="max-w-xl">
-              <h3 className="text-3xl font-black mb-4 tracking-tighter uppercase">Certified Solutions Architect</h3>
-              <p className="opacity-70 leading-relaxed font-serif italic text-lg">
-                "AWS Certified Solutions Architect – Associate (Amazon Web Services).
-                Validated expertise in designing distributed systems on AWS."
+              <h3 className="text-xl md:text-2xl font-bold mb-2 tracking-tight uppercase">Certifications</h3>
+              <p className="opacity-80 leading-relaxed font-serif italic text-base md:text-lg">
+                AWS Certified Solutions Architect – Associate (Amazon Web Services).<br/>
+                Cisco Certified Network Associate (CCNA).
               </p>
             </div>
-            <div className="flex gap-4">
-              <div className="glass p-6 rounded-3xl border border-accent/30 text-center group-hover:border-accent transition-colors">
-                <FaAws size={40} className="text-accent mx-auto mb-2" />
+            <div className="flex gap-3 md:gap-6">
+              <div className="glass p-4 md:p-6 rounded-2xl border border-accent/30 text-center group-hover:border-accent transition-colors">
+                <FaAws size={32} className="text-accent mx-auto mb-1" />
                 <div className="text-[10px] font-black uppercase tracking-widest">AWS CSAA</div>
               </div>
-              <div className="glass p-6 rounded-3xl border border-white/10 text-center group-hover:border-accent transition-colors">
-                <SiNodedotjs size={40} className="text-accent mx-auto mb-2" />
+              <div className="glass p-4 md:p-6 rounded-2xl border border-white/10 text-center group-hover:border-accent transition-colors">
+                <SiNodedotjs size={32} className="text-accent mx-auto mb-1" />
                 <div className="text-[10px] font-black uppercase tracking-widest">Cisco CCNA</div>
               </div>
             </div>
           </div>
           {/* Background Decoration */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-[100px] pointer-events-none group-hover:bg-accent/10 transition-colors" />
+          <div className="absolute top-0 right-0 w-40 h-40 md:w-64 md:h-64 bg-accent/5 rounded-full blur-[80px] md:blur-[100px] pointer-events-none group-hover:bg-accent/10 transition-colors" />
         </div>
       </div>
     </section>
