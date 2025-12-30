@@ -1,7 +1,23 @@
+# Use Node.js image
 FROM node:20-alpine
+
+# Set working directory
 WORKDIR /app
-COPY package*.json ./
+
+# Copy package files
+COPY package.json package-lock.json ./
+
+# Install dependencies
 RUN npm install
+
+# Copy the rest of the app
 COPY . .
+
+# Build the app
+RUN npm run build
+
+# Expose the port
 EXPOSE 5173
-CMD ["npm", "start"]
+
+# Serve the built app
+CMD ["npx", "vite", "preview", "--host", "0.0.0.0", "--port", "5173"]
