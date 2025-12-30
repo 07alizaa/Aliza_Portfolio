@@ -1,26 +1,21 @@
+version: "3.8"
+
 services:
-  mongo:
-    image: mongo:latest
-    volumes:
-      - mongo_data:/data/db
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - NODE_ENV=production
 
-backend:
-  build: ./backend
-  ports:
-    - "5000:5000"
-  depends_on:
-    - mongo
-  environment:
-    MONGO_URL: mongodb://mongo:27017/mydatabase
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
     depends_on:
-      - mongo
-
-frontend:
-  build: ./frontend
-  ports:
-  - "3000:3000"
-  environment:
-  -VITE_API_URL: http://localhost:5000/api
-
-volumes:
-  mongo_data: 
+      - backend
