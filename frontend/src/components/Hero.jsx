@@ -1,4 +1,16 @@
-import React, { useMemo } from 'react';
+import React from 'react';
+// --- RANDOM ARRAYS GENERATED AT MODULE SCOPE ---
+const backgroundRandoms = Array.from({ length: 7 }, () => ({
+  x: Math.random() * 80 + 10,
+  y: Math.random() * 80 + 10,
+  delay: Math.random() * 3
+}));
+
+const dotRandoms = Array.from({ length: 8 }, () => ({
+  x: (Math.random() - 0.5) * 300,
+  y: (Math.random() - 0.5) * 300,
+  duration: 3 + Math.random() * 2
+}));
 import { motion } from 'framer-motion';
 import { WatercolorText } from './ArtEngine';
 import { Mail, Github, Linkedin, ChevronDown, Terminal, Zap, Code, Shield, Cpu, Database, Cloud } from 'lucide-react';
@@ -26,7 +38,7 @@ const FloatingCodeSnippet = ({ children, x, y, delay }) => (
   </motion.div>
 );
 
-const EngineNode = ({ icon: Icon, type, label, x, y, delay }) => (
+const EngineNode = ({ type, label, x, y, delay, icon: Icon }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0 }}
     animate={{ opacity: 1, scale: 1 }}
@@ -44,7 +56,7 @@ const EngineNode = ({ icon: Icon, type, label, x, y, delay }) => (
       </div>
 
       <div className="absolute -top-3 -right-3 p-2 bg-accent rounded-xl text-white shadow-lg group-hover:scale-125 transition-transform">
-        <Icon size={16} />
+        {Icon && <Icon size={16} />}
       </div>
     </div>
   </motion.div>
@@ -66,6 +78,8 @@ const DataPipe = ({ d, delay }) => (
 );
 
 export const Hero = () => {
+  // Memoize codeSnippets so it doesn't change on every render
+  // Memoize codeSnippets so it doesn't change on every render
   const codeSnippets = [
     "await db.connect();",
     "router.post('/auth')",
@@ -76,14 +90,13 @@ export const Hero = () => {
     "git push origin main"
   ];
 
-  const backgroundElements = useMemo(() => {
-    return codeSnippets.map((snippet, i) => ({
-      snippet,
-      x: Math.random() * 80 + 10,
-      y: Math.random() * 80 + 10,
-      delay: i * 3
-    }));
-  }, []);
+  // Use pre-generated random positions for code snippets
+  const backgroundElements = codeSnippets.map((snippet, i) => ({
+    snippet,
+    x: backgroundRandoms[i].x,
+    y: backgroundRandoms[i].y,
+    delay: i * 3
+  }));
 
   return (
     <section id="hero" className="min-h-screen relative flex items-center justify-center px-6 overflow-hidden">
@@ -196,16 +209,17 @@ export const Hero = () => {
             <DataPipe d="M 325, 325 L 425, 325" delay={2} />
             <DataPipe d="M 125, 325 L 25, 325" delay={3} />
 
-            {[...Array(8)].map((_, i) => (
+            {/* Generate randoms for floating dots only once at module scope */}
+            {dotRandoms.map((rand, i) => (
               <motion.div
                 key={i}
                 animate={{
                   scale: [0, 1, 0],
                   opacity: [0, 0.5, 0],
-                  x: [0, (Math.random() - 0.5) * 300],
-                  y: [0, (Math.random() - 0.5) * 300]
+                  x: [0, rand.x],
+                  y: [0, rand.y]
                 }}
-                transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, delay: i * 0.5 }}
+                transition={{ duration: rand.duration, repeat: Infinity, delay: i * 0.5 }}
                 className="absolute top-1/2 left-1/2 w-1.5 h-1.5 bg-accent rounded-full"
               />
             ))}

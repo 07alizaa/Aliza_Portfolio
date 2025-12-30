@@ -44,7 +44,7 @@ const CustomCursor = () => {
 };
 
 const PortfolioContent = () => {
-  const { mood, currentMode } = useTheme();
+  const { mood } = useTheme();
   const [loading, setLoading] = useState(true);
   const [loadStep, setLoadStep] = useState(0);
 
@@ -68,7 +68,7 @@ const PortfolioContent = () => {
       });
     }, 400);
     return () => clearInterval(timer);
-  }, []);
+  }, [loadingSteps.length]);
 
   return (
     <AnimatePresence mode="wait">
