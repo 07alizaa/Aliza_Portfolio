@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --theme-transition: 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+  --theme-primary: #FF5A36;
+  --theme-bg: #FFFCF7;
+  --theme-text: #1A1A1A;
+  --theme-secondary: #FFA41B;
+  --theme-accent: #FFD700;
+}
+
+* {
+  @apply transition-colors duration-1000 ease-in-out;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  background: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-handwritten {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Premium Watercolor Background */
+.day {
+  background: linear-gradient(-45deg, var(--theme-bg), #FFF0E0, #FFE4D6, var(--theme-bg));
+  background-size: 400% 400%;
+  animation: watercolor 20s ease infinite;
+}
+
+.night {
+  background: linear-gradient(-45deg, var(--theme-bg), #0F0F1A, #161B33, var(--theme-bg));
+  background-size: 400% 400%;
+  animation: watercolor 20s ease infinite;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.day .glass {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(var(--theme-primary), 0.1);
+}
+
+@keyframes watercolor {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Dripping Text Effect */
+.dripping-text {
+  position: relative;
+}
+
+.dripping-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 10%;
+  width: 2px;
+  height: 0;
+  background: var(--theme-primary);
+  animation: drip 2s infinite;
+  border-radius: 0 0 5px 5px;
+}
+
+@keyframes drip {
+  0% { height: 0; opacity: 1; }
+  50% { height: 20px; opacity: 1; }
+  100% { height: 40px; opacity: 0; }
+}
+
+/* Liquid Hover Effect Component Classes */
+.liquid-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--theme-primary);
+  transform: translateY(100%);
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: -1;
+  border-radius: 50% 50% 0 0;
+}
+
+.liquid-hover:hover::before {
+  transform: translateY(0);
+  border-radius: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--theme-primary);
+}
+
+/* Artistic Enhancements */
+.text-accent { color: var(--theme-primary); }
+.bg-accent { background-color: var(--theme-primary); }
+.border-accent { border-color: var(--theme-primary); }
+
+.stroke-premium {
+  stroke: var(--theme-text);
+  stroke-width: 2.5;
+}
