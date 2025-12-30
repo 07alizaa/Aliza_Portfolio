@@ -4,9 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "lint:fix": "eslint . --ext .js,.jsx --fix",
+    "format": "prettier --write .",
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js,.jsx",
     "preview": "vite preview",
     "start": "vite preview --port 3000 --host"
   },
