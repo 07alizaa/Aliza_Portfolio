@@ -134,10 +134,11 @@ export const Hero = () => {
               />
             </div>
 
-            <p className="text-xl md:text-2xl max-w-2xl mx-auto lg:mx-0 opacity-80 mb-14 leading-relaxed font-serif italic border-l-8 border-accent pl-10 py-2">
-              "Building scalable <DrippingText text="MERN Architecture" className="text-accent" /> with a focus on high-performance backend logic.
-              AWS certified and passionate about <span className="text-accent font-bold">Cloud Deployment</span>."
-            </p>
+           <p className="text-xl md:text-2xl max-w-2xl mx-auto lg:mx-0 opacity-80 mb-14 leading-relaxed font-normal border-l-8 border-accent pl-10 py-2">
+            Full-stack developer building <DrippingText text="complete applications" className="text-accent" /> with modern JavaScript. 
+            Passionate about <span className="text-accent font-bold">cloud deployment</span> and 
+            <span className="text-accent font-bold">AWS services</span> for scalable solutions.
+          </p>
 
             <div className="flex flex-wrap gap-8 justify-center lg:justify-start items-center">
               <motion.button

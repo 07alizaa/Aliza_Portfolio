@@ -133,7 +133,7 @@ const PortfolioCard = ({ project }) => {
         </div>
 
         <div className="mb-6">
-          <h3 className={`text-3xl font-black mb-1 font-serif transition-colors duration-500 uppercase tracking-tighter ${hovered ? 'text-accent' : 'text-current'}`}>
+          <h3 className={`text-3xl font-black mb-1 transition-colors duration-500 uppercase tracking-tighter ${hovered ? 'text-accent' : 'text-current'}`}>
             {project.title}
           </h3>
           <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">
@@ -141,7 +141,7 @@ const PortfolioCard = ({ project }) => {
           </span>
         </div>
 
-        <p className="text-sm opacity-60 leading-relaxed font-medium italic mb-8 border-l-2 border-accent/20 pl-4">
+        <p className="text-sm opacity-60 leading-relaxed font-medium mb-8 border-l-2 border-accent/20 pl-4">
           {project.description}
         </p>
 
@@ -182,21 +182,19 @@ const PortfolioCard = ({ project }) => {
 
 export const Projects = () => {
   return (
-    <section id="projects" className="py-32 px-6 relative overflow-hidden">
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-24 gap-8">
-          <div className="max-w-3xl">
-            <h2 className="text-5xl lg:text-8xl font-black mb-8 tracking-tighter uppercase leading-none">
-              The <span className="text-accent italic">Studio</span> Work
-            </h2>
-            <p className="text-xl opacity-60 font-medium leading-relaxed italic border-l-4 border-accent pl-8">
-              Where complex backend logic meets fluid digital aesthetics.
-              Architecting systems with a <span className="italic text-accent">structured</span> but rigorous approach.
-            </p>
+    <section id="projects" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden snap-start">
+      <div className="max-w-6xl mx-auto w-full py-12">
+        <div className="text-center mb-16">
+          <div className="flex items-center gap-3 justify-center mb-5 opacity-60">
+            <div className="w-12 h-[2px] bg-accent" />
+            <div className="w-12 h-[2px] bg-accent" />
           </div>
-          <div className="hidden lg:block">
-            <div className="text-9xl font-black opacity-[0.03] tracking-tighter select-none">PORTFOLIO</div>
-          </div>
+          <h2 className="text-5xl lg:text-7xl font-black mb-4 tracking-tighter uppercase leading-tight">
+            Featured <span className="text-accent">Projects</span>
+          </h2>
+          <p className="max-w-2xl mx-auto opacity-70 text-base leading-relaxed font-medium">
+            Full-stack applications showcasing my technical skills and problem-solving approach.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">

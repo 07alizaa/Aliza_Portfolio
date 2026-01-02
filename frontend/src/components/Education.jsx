@@ -20,69 +20,65 @@ const educationItems = [
 ];
 
 export const Education = () => {
+  const [activeIndex, setActiveIndex] = React.useState(null);
 
   return (
-    <section id="education" className="py-32 px-6 relative overflow-hidden">
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between mb-24 gap-8">
-          <div className="max-w-2xl text-center md:text-left">
-            <h2 className="text-5xl lg:text-7xl font-black mb-6 tracking-tighter">
-              Academic <span className="text-accent italic">Foundation</span>
-            </h2>
-            <p className="text-xl opacity-60 font-medium leading-relaxed">
-              The blueprints of my technical expertise, forged through rigorous study and architectural focus.
-            </p>
-          </div>
-          <div className="hidden lg:block">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              className="w-32 h-32 border-2 border-dashed border-accent opacity-20 rounded-full flex items-center justify-center"
-            >
-              <Award size={40} className="text-accent" />
-            </motion.div>
-          </div>
+    <section id="education" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden snap-start">
+      <div className="max-w-6xl mx-auto w-full pt-2 pb-12">
+        <div className="text-center mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-block"
+          >
+            <div className="flex items-center gap-3 justify-center mb-5 opacity-60">
+              <div className="w-12 h-[2px] bg-accent" />
+              <div className="w-12 h-[2px] bg-accent" />
+            </div>
+          </motion.div>
+          <h2 className="text-5xl lg:text-7xl font-black mb-3 tracking-tighter uppercase leading-tight">
+            Academic <span className="text-accent">Journey</span>
+          </h2>
+          <p className="max-w-2xl mx-auto opacity-70 text-base leading-relaxed font-serif italic">
+            The blueprints of my technical expertise, forged through rigorous study and architectural focus.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-12 max-w-5xl mx-auto">
+        <ol className={`relative border-l-4 transition-colors duration-300 ${activeIndex !== null ? 'border-accent' : 'border-accent/20'} max-w-4xl mx-auto pl-8 pr-2 space-y-8`}>
           {educationItems.map((item, index) => {
             const Icon = item.icon;
+            const isActive = activeIndex === index;
             return (
-              <motion.div
+              <li
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="group relative flex flex-col md:flex-row gap-8 items-start glass p-10 rounded-[3rem] border border-white/5 hover:border-accent/30 transition-all duration-700"
+                className={`flex items-start gap-8 cursor-pointer transition-all duration-300 ${isActive ? 'scale-105' : ''}`}
+                onClick={() => setActiveIndex(index)}
+                tabIndex={0}
+                onKeyPress={e => { if (e.key === 'Enter') setActiveIndex(index); }}
               >
-                <div className="w-20 h-20 rounded-3xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-xl">
-                  <Icon size={32} />
-                </div>
-
+                <span className={`flex-shrink-0 w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center text-accent mt-0.5 shadow-md border-2 ${isActive ? 'border-accent' : 'border-accent/20'} transition-colors duration-300`}>
+                  <Icon size={36} />
+                </span>
                 <div className="flex-1">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
                     <div>
-                      <span className="text-accent font-black tracking-widest text-sm uppercase">{item.period}</span>
-                      <h3 className="text-3xl font-black mt-2 tracking-tight group-hover:text-accent transition-colors">{item.institution}</h3>
+                      <span className="text-accent font-black text-base uppercase tracking-widest">{item.period}</span>
+                      <h3 className="text-2xl lg:text-3xl font-black mt-1 tracking-tight">{item.institution}</h3>
                     </div>
-                    <div className="glass px-6 py-2 rounded-2xl text-xs font-bold opacity-60 uppercase tracking-widest bg-current/5">
+                    <div className="px-5 py-1 rounded-2xl bg-accent/10 text-base font-bold uppercase tracking-widest text-accent/90 mt-2 sm:mt-0">
                       {item.degree}
                     </div>
                   </div>
-                  <p className="text-lg opacity-60 leading-relaxed font-medium italic">
-                    "{item.description}"
+                  <p className="text-lg lg:text-xl opacity-80 leading-relaxed font-medium mt-1">
+                    {item.description.replace('Completed Higher Secondary Education with a GPA of 3.53, establishing a strong foundation in science and technology.', 'Achieved a GPA of 3.53, building a strong base in science and technology.').replace('Focusing on advanced backend systems, software architecture, and full-stack development methodologies.', 'Specializing in backend systems, software architecture, and full-stack methodologies.')}
                   </p>
                 </div>
-
-                {/* Decorative Elements */}
-                <div className="absolute -z-10 top-0 left-0 w-full h-full opacity-0 group-hover:opacity-10 pointer-events-none transition-opacity duration-700">
-                  <Icon size={150} className="absolute -right-10 -bottom-10" />
-                </div>
-              </motion.div>
+              </li>
             );
           })}
-        </div>
+        </ol>
       </div>
     </section>
+
   );
-};
+}

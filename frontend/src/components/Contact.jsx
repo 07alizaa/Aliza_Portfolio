@@ -21,30 +21,25 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 px-6 relative overflow-hidden">
-      <div className="container mx-auto max-w-6xl">
+      <section id="contact" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden snap-start">
+        <div className="max-w-6xl mx-auto w-full py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-stretch">
 
           {/* Left: Contact Info & Action */}
           <div className="flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-3 mb-8 opacity-60">
-                <Globe size={16} className="text-accent" />
-                <span className="text-xs font-black tracking-[0.4em] uppercase">Global Reach</span>
-              </div>
-
-              <h2 className="text-5xl lg:text-8xl font-black mb-8 tracking-tighter uppercase leading-none">
-                Let's <span className="text-accent">Connect</span>
+              <h2 className="text-5xl lg:text-7xl font-black mb-8 tracking-tighter uppercase leading-none">
+                Contact <span className="text-accent">Me</span>
               </h2>
-              <p className="text-xl opacity-60 mb-12 font-medium leading-relaxed italic border-l-4 border-accent pl-8">
-                Currently seeking internships and entry-level roles to apply and expand my backend architecture skills.
+              <p className="text-xl opacity-60 mb-12 font-medium leading-relaxed border-l-4 border-accent pl-8">
+                Interested in working together or have a question? Reach out using the form or the details below.
               </p>
 
               <div className="space-y-6">
                 {[
-                  { icon: Mail, label: 'Official Uplink', value: 'Simkhadaaliza080@gmail.com', href: 'mailto:Simkhadaaliza080@gmail.com' },
-                  { icon: Phone, label: 'Direct Line', value: '+977-9844652060', href: 'tel:+9779844652060' },
-                  { icon: Linkedin, label: 'Professional Network', value: 'Aliza Simkhada', href: 'https://www.linkedin.com/in/aliza-simkhada-711265287/' },
+                  { icon: Mail, label: 'Email', value: 'Simkhadaaliza080@gmail.com', href: 'mailto:Simkhadaaliza080@gmail.com' },
+                  { icon: Phone, label: 'Phone', value: '+977-9844652060', href: 'tel:+9779844652060' },
+                  { icon: Linkedin, label: 'LinkedIn', value: 'Aliza Simkhada', href: 'https://www.linkedin.com/in/aliza-simkhada-711265287/' },
                 ].map((item, i) => (
                   <motion.a
                     key={i}
@@ -67,100 +62,86 @@ export const Contact = () => {
             </div>
 
             <motion.div
-              className="mt-12 p-10 glass rounded-[3rem] relative overflow-hidden group cursor-pointer border border-accent/20"
-              whileHover={{ scale: 1.02 }}
+              className="mt-12 bg-white/80 dark:bg-[#18181b] border border-accent/30 rounded-2xl shadow-lg p-8 flex flex-col items-start gap-4"
+              whileHover={{ scale: 1.01 }}
             >
-              <div className="flex items-center justify-between relative z-10">
+              <div className="flex items-center gap-4 mb-2">
+                <FileText size={32} className="text-accent" />
                 <div>
-                  <h3 className="text-2xl font-black mb-2 uppercase tracking-tighter text-accent">Technical Blueprint</h3>
-                  <p className="opacity-60 text-sm font-medium italic">"Click to download my updated resume."</p>
-                </div>
-                <div className="p-5 bg-accent text-white rounded-2xl group-hover:rotate-12 transition-transform shadow-2xl">
-                  <FileText size={28} />
+                  <h3 className="text-xl font-bold text-accent mb-1">Download Resume</h3>
+                  <p className="text-sm opacity-70">Get my latest CV in PDF format.</p>
                 </div>
               </div>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-[60px] pointer-events-none group-hover:bg-accent/20 transition-colors" />
+              <a
+                href="/resume.pdf"
+                download
+                className="mt-2 px-6 py-3 bg-accent text-white rounded-xl font-bold uppercase tracking-wider shadow hover:bg-accent/90 transition-colors"
+              >
+                Download PDF
+              </a>
             </motion.div>
           </div>
 
           {/* Right: The Interactive Form */}
           <div className="relative">
-            <div className="glass p-12 rounded-[3.5rem] shadow-2xl relative overflow-hidden h-full border border-white/10">
-              <div className="flex items-center gap-4 mb-10">
-                <div className="w-3 h-3 rounded-full bg-accent animate-pulse" />
-                <span className="text-[10px] font-black tracking-[0.4em] uppercase opacity-60">Initializing Transmission...</span>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-10">
-                <div className="group relative">
+            <div className="glass border border-accent/30 rounded-2xl shadow-2xl p-10 flex flex-col gap-6">
+              <h3 className="text-3xl font-black text-accent mb-2 tracking-tight uppercase" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Send Me a Message</h3>
+              <p className="text-base opacity-70 mb-4 font-medium" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Fill out the form below and I’ll get back to you by email as soon as possible.</p>
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div>
+                  <label className="block text-sm font-bold mb-2 uppercase tracking-wide" htmlFor="name" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Your Name</label>
                   <input
+                    id="name"
                     type="text"
                     required
-                    className="w-full bg-transparent border-b-2 border-current/10 py-4 outline-none focus:border-accent transition-colors text-lg font-bold placeholder:opacity-40"
-                    placeholder="ALIZA WANTS TO KNOW YOUR NAME"
+                    className="w-full bg-transparent border-b-2 border-accent/20 py-3 px-2 outline-none focus:border-accent transition-colors text-base font-medium placeholder:opacity-50"
+                    placeholder="Enter your name"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
                   />
                 </div>
-
-                <div className="group relative">
+                <div>
+                  <label className="block text-sm font-bold mb-2 uppercase tracking-wide" htmlFor="email" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Your Email</label>
                   <input
+                    id="email"
                     type="email"
                     required
-                    className="w-full bg-transparent border-b-2 border-current/10 py-4 outline-none focus:border-accent transition-colors text-lg font-bold placeholder:opacity-40"
-                    placeholder="WHERE SHOULD THE REPLY GO?"
+                    className="w-full bg-transparent border-b-2 border-accent/20 py-3 px-2 outline-none focus:border-accent transition-colors text-base font-medium placeholder:opacity-50"
+                    placeholder="Enter your email address"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
                   />
                 </div>
-
-                <div className="group relative">
+                <div>
+                  <label className="block text-sm font-bold mb-2 uppercase tracking-wide" htmlFor="message" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Message</label>
                   <textarea
+                    id="message"
                     rows="6"
                     required
-                    className="w-full bg-transparent border-2 border-current/10 rounded-3xl p-6 outline-none focus:border-accent transition-all resize-none font-medium italic leading-relaxed"
-                    placeholder="Share your vision or project details..."
+                    className="w-full bg-transparent border-2 border-accent/20 rounded-xl p-4 outline-none focus:border-accent transition-all resize-none text-base font-medium placeholder:opacity-50"
+                    placeholder="Type your message here..."
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
                   ></textarea>
                 </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="w-full py-6 rounded-[2rem] bg-accent text-white font-black uppercase tracking-[0.3em] flex items-center justify-center gap-4 shadow-[0_20px_40px_-15px_rgba(255,90,54,0.3)] disabled:opacity-50 text-lg"
+                  className="w-full py-4 rounded-xl bg-accent text-white font-black uppercase tracking-wider shadow hover:bg-accent/90 transition-colors disabled:opacity-60 text-lg"
+                  style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
                 >
-                  {status === 'sending' ? (
-                    'Transmitting...'
-                  ) : (
-                    <>
-                      EXECUTE UPLINK <Zap size={22} fill="currentColor" />
-                    </>
-                  )}
-                </motion.button>
+                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                </button>
+                {status === 'success' && (
+                  <div className="text-green-600 font-bold text-center mt-4">Thank you! Your message has been sent.</div>
+                )}
+                {status === 'error' && (
+                  <div className="text-red-600 font-bold text-center mt-4">Something went wrong. Please try again.</div>
+                )}
               </form>
-
-              {status === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="absolute inset-0 z-50 glass flex items-center justify-center flex-col text-center p-12"
-                >
-                  <div className="w-24 h-24 rounded-full bg-accent/20 flex items-center justify-center mb-6">
-                    <Zap size={48} className="text-accent" />
-                  </div>
-                  <h3 className="text-3xl font-black mb-4 tracking-tighter uppercase">Transmission Successful!</h3>
-                  <p className="text-lg opacity-70 font-medium italic">"I'll analyze your request and get back to you shortly."</p>
-                  <button
-                    onClick={() => setStatus(null)}
-                    className="mt-10 font-black text-xs uppercase tracking-widest text-accent hover:underline"
-                  >
-                    Send another message
-                  </button>
-                </motion.div>
-              )}
             </div>
           </div>
         </div>
