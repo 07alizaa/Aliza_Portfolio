@@ -21,17 +21,17 @@ export const Contact = () => {
   };
 
   return (
-      <section id="contact" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden snap-start">
-        <div className="max-w-6xl mx-auto w-full py-12">
+    <section id="contact" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden snap-start">
+      <div className="max-w-6xl mx-auto w-full py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-stretch">
 
           {/* Left: Contact Info & Action */}
           <div className="flex flex-col justify-between">
             <div>
-              <h2 className="text-5xl lg:text-7xl font-black mb-8 tracking-tighter uppercase leading-none">
+              <h2 className="text-4xl lg:text-5xl font-black mb-8 tracking-tighter uppercase leading-none">
                 Contact <span className="text-accent">Me</span>
               </h2>
-              <p className="text-xl opacity-60 mb-12 font-medium leading-relaxed border-l-4 border-accent pl-8">
+              <p className="text-base opacity-60 mb-8 font-medium leading-relaxed border-l-4 border-accent pl-6">
                 Interested in working together or have a question? Reach out using the form or the details below.
               </p>
 
@@ -54,7 +54,7 @@ export const Contact = () => {
                     </div>
                     <div>
                       <span className="text-[10px] uppercase opacity-40 font-black tracking-widest">{item.label}</span>
-                      <p className="font-bold text-lg tracking-tight group-hover:text-accent transition-colors">{item.value}</p>
+                      <p className="font-bold text-base tracking-tight group-hover:text-accent transition-colors">{item.value}</p>
                     </div>
                   </motion.a>
                 ))}
@@ -68,7 +68,7 @@ export const Contact = () => {
               <div className="flex items-center gap-4 mb-2">
                 <FileText size={32} className="text-accent" />
                 <div>
-                  <h3 className="text-xl font-bold text-accent mb-1">Download Resume</h3>
+                  <h3 className="text-lg font-bold text-accent mb-1">Download Resume</h3>
                   <p className="text-sm opacity-70">Get my latest CV in PDF format.</p>
                 </div>
               </div>
@@ -85,8 +85,8 @@ export const Contact = () => {
           {/* Right: The Interactive Form */}
           <div className="relative">
             <div className="glass border border-accent/30 rounded-2xl shadow-2xl p-10 flex flex-col gap-6">
-              <h3 className="text-3xl font-black text-accent mb-2 tracking-tight uppercase" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Send Me a Message</h3>
-              <p className="text-base opacity-70 mb-4 font-medium" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Fill out the form below and I’ll get back to you by email as soon as possible.</p>
+              <h3 className="text-2xl font-black text-accent mb-2 tracking-tight uppercase" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Send Me a Message</h3>
+              <p className="text-sm opacity-70 mb-4 font-medium" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Fill out the form below and I’ll get back to you by email as soon as possible.</p>
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
                   <label className="block text-sm font-bold mb-2 uppercase tracking-wide" htmlFor="name" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Your Name</label>
@@ -94,7 +94,7 @@ export const Contact = () => {
                     id="name"
                     type="text"
                     required
-                    className="w-full bg-transparent border-b-2 border-accent/20 py-3 px-2 outline-none focus:border-accent transition-colors text-base font-medium placeholder:opacity-50"
+                    className="w-full bg-transparent border-b-2 border-accent/20 py-3 px-2 outline-none focus:border-accent transition-colors text-sm font-medium placeholder:opacity-50"
                     placeholder="Enter your name"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -107,7 +107,7 @@ export const Contact = () => {
                     id="email"
                     type="email"
                     required
-                    className="w-full bg-transparent border-b-2 border-accent/20 py-3 px-2 outline-none focus:border-accent transition-colors text-base font-medium placeholder:opacity-50"
+                    className="w-full bg-transparent border-b-2 border-accent/20 py-3 px-2 outline-none focus:border-accent transition-colors text-sm font-medium placeholder:opacity-50"
                     placeholder="Enter your email address"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -120,7 +120,7 @@ export const Contact = () => {
                     id="message"
                     rows="6"
                     required
-                    className="w-full bg-transparent border-2 border-accent/20 rounded-xl p-4 outline-none focus:border-accent transition-all resize-none text-base font-medium placeholder:opacity-50"
+                    className="w-full bg-transparent border-2 border-accent/20 rounded-xl p-4 outline-none focus:border-accent transition-all resize-none text-sm font-medium placeholder:opacity-50"
                     placeholder="Type your message here..."
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -130,7 +130,7 @@ export const Contact = () => {
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="w-full py-4 rounded-xl bg-accent text-white font-black uppercase tracking-wider shadow hover:bg-accent/90 transition-colors disabled:opacity-60 text-lg"
+                  className="w-full py-4 rounded-xl bg-accent text-white font-black uppercase tracking-wider shadow hover:bg-accent/90 transition-colors disabled:opacity-60 text-base"
                   style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
                 >
                   {status === 'sending' ? 'Sending...' : 'Send Message'}

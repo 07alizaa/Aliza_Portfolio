@@ -32,7 +32,7 @@ const FloatingCodeSnippet = ({ children, x, y, delay }) => (
       y: [`${y}vh`, `${y - 12}vh`],
     }}
     transition={{ duration: 25, repeat: Infinity, delay, ease: "linear" }}
-    className="absolute font-mono text-[10px] text-accent/40 pointer-events-none select-none whitespace-nowrap"
+    className="absolute font-mono text-xs text-accent/40 pointer-events-none select-none whitespace-nowrap"
   >
     {children}
   </motion.div>
@@ -51,7 +51,7 @@ const EngineNode = ({ type, label, x, y, delay, icon: Icon }) => (
         <LivingDoodle type={type} className="w-16 h-16 md:w-20 md:h-20" />
       </div>
 
-      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-accent text-white text-[9px] font-black px-3 py-1 rounded-full whitespace-nowrap tracking-widest uppercase">
+      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-accent text-white text-[10px] font-black px-3 py-1 rounded-full whitespace-nowrap tracking-widest uppercase">
         {label}
       </div>
 
@@ -126,26 +126,26 @@ export const Hero = () => {
             <div className="mb-10 overflow-visible flex flex-col items-center lg:items-start leading-none">
               <WatercolorText
                 text="ALIZA"
-                className="text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter text-day-primary uppercase leading-[0.7] whitespace-nowrap"
+                className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-day-primary uppercase leading-[0.8] whitespace-nowrap"
               />
               <WatercolorText
                 text="SIMKHADA"
-                className="text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter text-accent uppercase leading-[0.7] whitespace-nowrap"
+                className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-accent uppercase leading-[0.8] whitespace-nowrap"
               />
             </div>
 
-           <p className="text-xl md:text-2xl max-w-2xl mx-auto lg:mx-0 opacity-80 mb-14 leading-relaxed font-normal border-l-8 border-accent pl-10 py-2">
-            Full-stack developer building <DrippingText text="complete applications" className="text-accent" /> with modern JavaScript. 
-            Passionate about <span className="text-accent font-bold">cloud deployment</span> and 
-            <span className="text-accent font-bold">AWS services</span> for scalable solutions.
-          </p>
+            <p className="text-base md:text-lg max-w-2xl mx-auto lg:mx-0 opacity-80 mb-10 leading-relaxed font-normal border-l-8 border-accent pl-8 py-2">
+              Full-stack developer building <DrippingText text="complete applications" className="text-accent" /> with modern JavaScript.
+              Passionate about <span className="text-accent font-bold">cloud deployment</span> and
+              <span className="text-accent font-bold">AWS services</span> for scalable solutions.
+            </p>
 
             <div className="flex flex-wrap gap-8 justify-center lg:justify-start items-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-                className="px-12 py-6 rounded-2xl bg-accent text-white font-black shadow-[0_25px_50px_-15px_rgba(255,90,54,0.4)] flex items-center gap-4 text-xl tracking-widest uppercase transition-all"
+                className="px-8 py-4 rounded-2xl bg-accent text-white font-black shadow-[0_25px_50px_-15px_rgba(255,90,54,0.4)] flex items-center gap-3 text-base tracking-widest uppercase transition-all"
               >
                 Let's Build <Zap size={22} fill="currentColor" />
               </motion.button>

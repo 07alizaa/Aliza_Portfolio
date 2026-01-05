@@ -36,10 +36,10 @@ export const Education = () => {
               <div className="w-12 h-[2px] bg-accent" />
             </div>
           </motion.div>
-          <h2 className="text-5xl lg:text-7xl font-black mb-3 tracking-tighter uppercase leading-tight">
+          <h2 className="text-4xl lg:text-5xl font-black mb-3 tracking-tighter uppercase leading-tight">
             Academic <span className="text-accent">Journey</span>
           </h2>
-          <p className="max-w-2xl mx-auto opacity-70 text-base leading-relaxed font-serif italic">
+          <p className="max-w-2xl mx-auto opacity-70 text-sm md:text-base leading-relaxed font-serif italic">
             The blueprints of my technical expertise, forged through rigorous study and architectural focus.
           </p>
         </div>
@@ -62,14 +62,14 @@ export const Education = () => {
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
                     <div>
-                      <span className="text-accent font-black text-base uppercase tracking-widest">{item.period}</span>
-                      <h3 className="text-2xl lg:text-3xl font-black mt-1 tracking-tight">{item.institution}</h3>
+                      <span className="text-accent font-black text-sm uppercase tracking-widest">{item.period}</span>
+                      <h3 className="text-xl lg:text-2xl font-black mt-1 tracking-tight">{item.institution}</h3>
                     </div>
-                    <div className="px-5 py-1 rounded-2xl bg-accent/10 text-base font-bold uppercase tracking-widest text-accent/90 mt-2 sm:mt-0">
+                    <div className="px-4 py-1 rounded-2xl bg-accent/10 text-sm font-bold uppercase tracking-widest text-accent/90 mt-2 sm:mt-0">
                       {item.degree}
                     </div>
                   </div>
-                  <p className="text-lg lg:text-xl opacity-80 leading-relaxed font-medium mt-1">
+                  <p className="text-base lg:text-lg opacity-80 leading-relaxed font-medium mt-1">
                     {item.description.replace('Completed Higher Secondary Education with a GPA of 3.53, establishing a strong foundation in science and technology.', 'Achieved a GPA of 3.53, building a strong base in science and technology.').replace('Focusing on advanced backend systems, software architecture, and full-stack development methodologies.', 'Specializing in backend systems, software architecture, and full-stack methodologies.')}
                   </p>
                 </div>
