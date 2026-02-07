@@ -6,15 +6,72 @@ import axios from 'axios';
 export const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState(null);
+  const [errors, setErrors] = useState({ name: '', email: '', message: '' });
+
+  // Email validation regex
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Validate form fields
+  const validateForm = () => {
+    const newErrors = { name: '', email: '', message: '' };
+    let isValid = true;
+
+    // Name validation
+    if (!form.name.trim()) {
+      newErrors.name = 'Name is required';
+      isValid = false;
+    }
+
+    // Email validation
+    if (!form.email.trim()) {
+      newErrors.email = 'Email is required';
+      isValid = false;
+    } else if (!validateEmail(form.email.trim())) {
+      newErrors.email = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    // Message validation
+    if (!form.message.trim()) {
+      newErrors.message = 'Message cannot be empty';
+      isValid = false;
+    } else if (form.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters long';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Clear previous errors and status
+    setErrors({ name: '', email: '', message: '' });
+    setStatus(null);
+
+    // Validate form
+    if (!validateForm()) {
+      setStatus('validation_error');
+      return;
+    }
+
     setStatus('sending');
     try {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-      await axios.post(`${apiUrl}/contact`, form);
+      // Send trimmed data
+      await axios.post(`${apiUrl}/contact`, {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        message: form.message.trim()
+      });
       setStatus('success');
       setForm({ name: '', email: '', message: '' });
+      setErrors({ name: '', email: '', message: '' });
     } catch {
       setStatus('error');
     }
@@ -94,12 +151,15 @@ export const Contact = () => {
                     id="name"
                     type="text"
                     required
-                    className="w-full bg-transparent border-b-2 border-accent/20 py-3 px-2 outline-none focus:border-accent transition-colors text-sm font-medium placeholder:opacity-50"
+                    className={`w-full bg-transparent border-b-2 ${errors.name ? 'border-red-500' : 'border-accent/20'} py-3 px-2 outline-none focus:border-accent transition-colors text-sm font-medium placeholder:opacity-50`}
                     placeholder="Enter your name"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-xs mt-2 font-semibold">{errors.name}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-bold mb-2 uppercase tracking-wide" htmlFor="email" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Your Email</label>
@@ -107,12 +167,15 @@ export const Contact = () => {
                     id="email"
                     type="email"
                     required
-                    className="w-full bg-transparent border-b-2 border-accent/20 py-3 px-2 outline-none focus:border-accent transition-colors text-sm font-medium placeholder:opacity-50"
+                    className={`w-full bg-transparent border-b-2 ${errors.email ? 'border-red-500' : 'border-accent/20'} py-3 px-2 outline-none focus:border-accent transition-colors text-sm font-medium placeholder:opacity-50`}
                     placeholder="Enter your email address"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-2 font-semibold">{errors.email}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-bold mb-2 uppercase tracking-wide" htmlFor="message" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Message</label>
@@ -120,12 +183,15 @@ export const Contact = () => {
                     id="message"
                     rows="6"
                     required
-                    className="w-full bg-transparent border-2 border-accent/20 rounded-xl p-4 outline-none focus:border-accent transition-all resize-none text-sm font-medium placeholder:opacity-50"
+                    className={`w-full bg-transparent border-2 ${errors.message ? 'border-red-500' : 'border-accent/20'} rounded-xl p-4 outline-none focus:border-accent transition-all resize-none text-sm font-medium placeholder:opacity-50`}
                     placeholder="Type your message here..."
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
                   ></textarea>
+                  {errors.message && (
+                    <p className="text-red-500 text-xs mt-2 font-semibold">{errors.message}</p>
+                  )}
                 </div>
                 <button
                   type="submit"
@@ -137,6 +203,9 @@ export const Contact = () => {
                 </button>
                 {status === 'success' && (
                   <div className="text-green-600 font-bold text-center mt-4">Thank you! Your message has been sent.</div>
+                )}
+                {status === 'validation_error' && (
+                  <div className="text-red-600 font-bold text-center mt-4">Please fix the errors above before submitting.</div>
                 )}
                 {status === 'error' && (
                   <div className="text-red-600 font-bold text-center mt-4">Something went wrong. Please try again.</div>
