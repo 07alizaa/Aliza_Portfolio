@@ -218,4 +218,4 @@ Feel free to reach out for collaboration or inquiries:
 
 ---
 
-**Built with ❤️ by Aliza**
+**Built by Aliza**

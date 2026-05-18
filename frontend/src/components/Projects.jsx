@@ -17,7 +17,7 @@ const projectData = [
     tech: ['MongoDB', 'Express', 'React', 'Node.js', 'Redux'],
     icon: BarChart3,
     color: '#FF5A36',
-    githubUrl: 'https://github.com/07alizaa',
+    githubUrl: 'https://github.com/07alizaa/sales_dashboard',
     liveUrl: '#'
   },
   {
