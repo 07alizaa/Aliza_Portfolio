@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Phone, Mail, Github, Linkedin, Zap, Globe } from 'lucide-react';
-import axios from 'axios';
+import emailjs from '@emailjs/browser';
 
 export const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState(null);
   const [errors, setErrors] = useState({ name: '', email: '', message: '' });
+
+  // Initialize EmailJS on component mount
+  useEffect(() => {
+    emailjs.init('tp2srwR-wieQe0E4V');
+  }, []);
 
   // Email validation regex
   const validateEmail = (email) => {
@@ -62,17 +67,18 @@ export const Contact = () => {
 
     setStatus('sending');
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-      // Send trimmed data
-      await axios.post(`${apiUrl}/contact`, {
+      // Send using EmailJS
+      await emailjs.send('service_vkprarh', 'template_uzf104p', {
         name: form.name.trim(),
         email: form.email.trim(),
-        message: form.message.trim()
+        message: form.message.trim(),
+        title: 'New Message'
       });
       setStatus('success');
       setForm({ name: '', email: '', message: '' });
       setErrors({ name: '', email: '', message: '' });
-    } catch {
+    } catch (error) {
+      console.error('EmailJS error:', error);
       setStatus('error');
     }
   };

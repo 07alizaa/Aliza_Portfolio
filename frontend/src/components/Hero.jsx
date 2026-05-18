@@ -13,7 +13,7 @@ const dotRandoms = Array.from({ length: 8 }, () => ({
 }));
 import { motion } from 'framer-motion';
 import { WatercolorText } from './ArtEngine';
-import { Mail, Github, Linkedin, ChevronDown, Terminal, Zap, Code, Shield, Cpu, Database, Cloud } from 'lucide-react';
+import { Mail, Github, Linkedin, ChevronDown, Terminal, Zap, Code, Shield, Cpu, Database, Cloud, Download } from 'lucide-react';
 import { LivingDoodle } from './DoodleLife';
 
 const DrippingText = ({ text, className = "" }) => {
